@@ -15,7 +15,16 @@ const DocumentProvider: React.FC<DocumentProviderProps> = ({ children }) => {
 	const [currentDocument, setCurrentDocument] = useState<Document | null>();
 
 	return (
-		<DocumentContext.Provider value={document}>
+		<DocumentContext.Provider
+			value={{
+				documents,
+				setDocuments,
+				filteredDocuments,
+				setFilteredDocuments,
+				currentDocument,
+				setCurrentDocument,
+			}}
+		>
 			{children}
 		</DocumentContext.Provider>
 	);

@@ -6,17 +6,27 @@ interface IconProps {
 	Icon: IconType;
 	className?: string;
 	href?: string;
+	onClick?: () => void;
 }
 
-const Icon: React.FC<IconProps> = ({ Icon, className, href }) => {
+const Icon: React.FC<IconProps> = ({
+	Icon,
+	className,
+	href,
+	onClick,
+}) => {
 	return (
 		<>
 			{href ? (
 				<Link href={href}>
-					<Icon className={className} />
+					<button onClick={onClick} className={`rounded-full p-0`}>
+						<Icon className={className} />
+					</button>
 				</Link>
 			) : (
-				<Icon className={className} />
+				<button onClick={onClick} className={`rounded-full p-0`}>
+					<Icon className={className} />
+				</button>
 			)}
 		</>
 	);

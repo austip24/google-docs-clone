@@ -6,13 +6,18 @@ const useMediaQuery = (query: string): boolean => {
 	const [matches, setMatches] = useState(false);
 
 	useEffect(() => {
-		const matchQueryList = window.matchMedia(query);
-		const handleChange = (e: any) => setMatches(e.matches);
+		const media = window.matchMedia(query);
+		if (media.matches !== matches) {
+			setMatches(media.matches);
+		}
 
-		matchQueryList.addEventListener("change", handleChange);
+		const handleChange = () => {
+			setMatches(media.matches);
+		};
 
-		return () => matchQueryList.removeEventListener("change", handleChange);
-	}, [query]);
+		media.addEventListener("change", handleChange);
+		return () => media.removeEventListener("change", handleChange);
+	}, [matches, query]);
 
 	return matches;
 };
