@@ -3,14 +3,14 @@ import { TbDotsVertical } from "react-icons/tb";
 import { HiDocumentText } from "react-icons/hi";
 import Icon from "../Icon";
 
-interface DocumentCardProps {
+interface DocumentProps {
 	name: string;
 	dateCreated: string;
 }
 
-const Document: React.FC<DocumentCardProps> = ({ name, dateCreated }) => {
+const Document: React.FC<DocumentProps> = ({ name, dateCreated }) => {
 	return (
-		<button className="group relative flex justify-between items-center rounded-3xl hover:bg-blue-100 cursor-pointer py-1 transition-colors duration-200 ease-in-out">
+		<div className="group relative flex justify-between items-center rounded-3xl hover:bg-blue-100 cursor-pointer py-1 transition-colors duration-200 ease-in-out">
 			<div className="flex items-center">
 				<Icon
 					Icon={HiDocumentText}
@@ -28,7 +28,7 @@ const Document: React.FC<DocumentCardProps> = ({ name, dateCreated }) => {
 				/>
 			</div>
 			<div className="group-hover:opacity-0 absolute bottom-0 left-0 bg-gray-200 h-[1px] w-full transition-all duration-200 ease-in-out"></div>
-		</button>
+		</div>
 	);
 };
 
