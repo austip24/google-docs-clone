@@ -1,5 +1,5 @@
 import { User } from "firebase/auth";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
 
 const AuthContext = createContext({});
@@ -33,6 +33,3 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 };
 
 export default AuthContextProvider;
-function useEffect(arg0: () => void, arg1: never[]) {
-	throw new Error("Function not implemented.");
-}
