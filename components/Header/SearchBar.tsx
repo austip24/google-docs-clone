@@ -101,7 +101,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 						<Icon
 							Icon={ImCross}
 							className={`${
-								searchClicked ? "" : "opacity-0"
+								searchClicked ? "" : "hidden"
 							} absolute top-[0.07rem] right-1 p-2 text-3xl text-gray-500 rounded-full transition-all duration-200 hover:bg-gray-200 cursor-pointer`}
 							onClick={handleInputClear}
 						/>
