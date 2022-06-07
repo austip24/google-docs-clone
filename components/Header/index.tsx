@@ -4,11 +4,10 @@ import { AiOutlineMenu, AiOutlineUser } from "react-icons/ai";
 import { IoDocumentText } from "react-icons/io5";
 import { TbGridDots } from "react-icons/tb";
 import useMediaQuery from "../../hooks/useMediaQuery";
-import HeaderIcon from "./Icon";
+import Icon from "../Icon";
 import SearchBar from "./SearchBar";
 import tailwindConfig from "../../tailwind.config";
 import useToggle from "../../hooks/useToggle";
-import useScreenSize from "../../hooks/useScreenSize";
 
 interface HeaderProps {}
 
@@ -24,7 +23,7 @@ const Header: React.FC<HeaderProps> = () => {
 	return (
 		<div className="sticky top-0 h-12 z-50 flex items-center px-4 py-2 shadow-md bg-white gap-1">
 			{/* Hamburger menu icon */}
-			<HeaderIcon
+			<Icon
 				Icon={AiOutlineMenu}
 				className={`${!isMinWidthMedium && searchClicked ? "hidden" : ""} 
 					p-2 text-4xl text-gray-700 cursor-pointer hover:bg-gray-200 rounded-full transition-all duration-200`}
@@ -37,7 +36,7 @@ const Header: React.FC<HeaderProps> = () => {
 						!isMinWidthMedium && searchClicked ? "hidden" : ""
 					} inline-flex md:mx-3`}
 				>
-					<HeaderIcon
+					<Icon
 						Icon={IoDocumentText}
 						className="hidden md:block text-2xl cursor-pointer fill-sky-500"
 					/>
@@ -53,7 +52,7 @@ const Header: React.FC<HeaderProps> = () => {
 				toggleSearchClicked={toggleSearchClicked}
 			/>
 
-			<HeaderIcon
+			<Icon
 				Icon={TbGridDots}
 				className="p-2 text-4xl text-gray-700 cursor-pointer hover:bg-gray-200 rounded-full transition-all duration-200"
 			/>
@@ -61,7 +60,7 @@ const Header: React.FC<HeaderProps> = () => {
 			{user ? (
 				<div>User</div>
 			) : (
-				<HeaderIcon
+				<Icon
 					Icon={AiOutlineUser}
 					className="p-2 text-4xl text-gray-700 cursor-pointer hover:bg-gray-200 rounded-full transition-all duration-200"
 				/>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import tailwindConfig from "../../tailwind.config";
 import useMediaQuery from "../../hooks/useMediaQuery";
-import HeaderIcon from "./Icon";
+import Icon from "../Icon";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiArrowBack } from "react-icons/bi";
 
@@ -37,10 +37,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
 		<>
 			{isMinWidthMedium ? (
 				<div className="flex items-center justify-center relative grow">
-					<HeaderIcon
-						onClick={toggleSearchClicked}
+					<Icon
 						Icon={AiOutlineSearch}
-						className="absolute top-[0.1rem] left-1 p-1 text-3xl text-gray-500 rounded-full transition-all duration-200 hover:bg-gray-200 cursor-pointer"
+						className="absolute top-[0.07rem] left-1 p-1 text-3xl text-gray-500 rounded-full transition-all duration-200 hover:bg-gray-200 cursor-pointer"
 					/>
 					<input
 						ref={inputRef}
@@ -53,12 +52,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
 				</div>
 			) : (
 				<div className="flex items-center justify-end relative grow">
-					<HeaderIcon
+					<Icon
 						onClick={toggleSearchClicked}
 						Icon={BiArrowBack}
 						className={`${
 							searchClicked ? "" : "hidden"
-						} absolute top-[0.1rem] left-1 p-1 text-3xl text-gray-500 rounded-full transition-all duration-200 hover:bg-gray-200 cursor-pointer`}
+						} absolute top-[0.07rem] left-1 p-1 text-3xl text-gray-500 rounded-full transition-all duration-200 hover:bg-gray-200 cursor-pointer`}
 					/>
 					<input
 						ref={inputRef}
@@ -70,7 +69,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 						} pl-10 py-1.5 text-sm text-gray-700 w-full outline-none border-none bg-gray-100 rounded
 						focus:bg-white focus:shadow focus:ring-0 transition-all duration-200`}
 					/>
-					<HeaderIcon
+					<Icon
 						onClick={toggleSearchClicked}
 						Icon={AiOutlineSearch}
 						className={`${

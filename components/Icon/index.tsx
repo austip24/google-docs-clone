@@ -9,12 +9,7 @@ interface IconProps {
 	onClick?: () => void;
 }
 
-const Icon: React.FC<IconProps> = ({
-	Icon,
-	className,
-	href,
-	onClick,
-}) => {
+const Icon: React.FC<IconProps> = ({ Icon, className, href, onClick }) => {
 	return (
 		<>
 			{href ? (
