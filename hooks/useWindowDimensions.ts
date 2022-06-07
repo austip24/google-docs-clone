@@ -12,6 +12,8 @@ export const getWindowDimensions = (): Dimensions => {
 	};
 };
 
+// Note: This is only meant to be used for client side rendering
+// and will not work for server side rendering.
 const useWindowDimensions = (): Dimensions => {
 	const [windowDimensions, setWindowDimensions] = useState<Dimensions>(
 		getWindowDimensions()
