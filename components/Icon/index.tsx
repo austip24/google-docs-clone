@@ -6,7 +6,7 @@ interface IconProps {
 	Icon: IconType;
 	className?: string;
 	href?: string;
-	onClick?: () => void;
+	onClick?: React.MouseEventHandler;
 }
 
 const Icon: React.FC<IconProps> = ({ Icon, className, href, onClick }) => {
