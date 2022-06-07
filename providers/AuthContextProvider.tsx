@@ -4,6 +4,7 @@ import {
 	GoogleAuthProvider,
 	signOut,
 } from "firebase/auth";
+import Router from "next/router";
 import React, {
 	createContext,
 	useCallback,
@@ -47,6 +48,12 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 
 		return () => unsubscribe();
 	}, []);
+
+	useEffect(() => {
+		if (!user) {
+			Router.replace("/login");
+		}
+	}, [user]);
 
 	const login = useCallback(async () => {
 		try {

@@ -32,7 +32,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
 		if (!isMinWidthMedium && searchClicked) {
 			inputRef.current?.focus();
 		}
-	}, [isMinWidthMedium, searchClicked, inputRef]);
+		// if (!isMinWidthMedium && query.length > 0) {
+		// 	if (!searchClicked && toggleSearchClicked) toggleSearchClicked();
+		// 	inputRef.current?.focus();
+		// }
+	}, [isMinWidthMedium, searchClicked, toggleSearchClicked, inputRef, query]);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
 		setQuery(e.target.value);
@@ -40,56 +44,56 @@ const SearchBar: React.FC<SearchBarProps> = ({
 	const handleInputClear = (e: React.MouseEvent<HTMLInputElement>) =>
 		setQuery("");
 
-	useEffect(() => {
-		console.log(query);
-	}, [query]);
-
 	return (
 		<>
 			{isMinWidthMedium ? (
-				<div className="flex items-center justify-center relative grow">
-					<Icon
-						Icon={AiOutlineSearch}
-						className="absolute top-[0.07rem] left-1 p-1 text-3xl text-gray-500 rounded-full transition-all duration-200 hover:bg-gray-200 cursor-pointer"
-					/>
-					<input
-						ref={inputRef}
-						type="text"
-						onChange={handleInputChange}
-						placeholder="Search"
-						className="px-10 py-1.5 text-sm text-gray-700 w-full outline-none border-none bg-gray-100 rounded
-						focus:bg-white focus:shadow focus:ring-0 transition-all duration-200"
-						value={query}
-					/>
-					{query.length > 0 && (
+				<div className="flex items-center justify-center grow">
+					<div className="grow max-w-xl relative">
 						<Icon
-							Icon={ImCross}
-							className="absolute top-[0.07rem] right-1 p-2 text-3xl text-gray-500 rounded-full transition-all duration-200 hover:bg-gray-200 cursor-pointer"
-							onClick={handleInputClear}
+							Icon={AiOutlineSearch}
+							className="absolute top-[0.07rem] left-1 p-1 text-3xl text-gray-500 rounded-full transition-all duration-200 hover:bg-gray-200 cursor-pointer"
 						/>
-					)}
+						<input
+							ref={inputRef}
+							type="text"
+							onChange={handleInputChange}
+							placeholder="Search"
+							className="w-full px-10 py-1.5 text-sm text-gray-700 outline-none border-none bg-gray-100 rounded
+						focus:bg-white focus:shadow focus:ring-0 transition-all duration-200"
+							value={query}
+						/>
+						{query.length > 0 && (
+							<Icon
+								Icon={ImCross}
+								className="absolute top-[0.07rem] right-1 p-2 text-3xl text-gray-500 rounded-full transition-all duration-200 hover:bg-gray-200 cursor-pointer"
+								onClick={handleInputClear}
+							/>
+						)}
+					</div>
 				</div>
 			) : (
 				<div className="flex items-center justify-end relative grow">
-					<Icon
-						onClick={toggleSearchClicked}
-						Icon={BiArrowBack}
-						className={`${
-							searchClicked ? "" : "hidden"
-						} absolute top-[0.07rem] left-1 p-1 text-3xl text-gray-500 rounded-full transition-all duration-200 hover:bg-gray-200 cursor-pointer`}
-					/>
-					<input
-						ref={inputRef}
-						type="text"
-						placeholder="Search"
-						autoFocus
-						onChange={handleInputChange}
-						className={`${
-							searchClicked ? "" : "hidden"
-						} px-10 py-1.5 text-sm text-gray-700 w-full outline-none border-none bg-gray-100 rounded
+					<div className="grow max-w-xl relative">
+						<Icon
+							onClick={toggleSearchClicked}
+							Icon={BiArrowBack}
+							className={`${
+								searchClicked ? "" : "hidden"
+							} absolute top-[0.07rem] left-1 p-1 text-3xl text-gray-500 rounded-full transition-all duration-200 hover:bg-gray-200 cursor-pointer`}
+						/>
+						<input
+							ref={inputRef}
+							type="text"
+							placeholder="Search"
+							autoFocus
+							onChange={handleInputChange}
+							className={`${
+								searchClicked ? "" : "hidden"
+							} w-full px-10 py-1.5 text-sm text-gray-700 outline-none border-none bg-gray-100 rounded
 						focus:bg-white focus:shadow focus:ring-0 transition-all duration-200`}
-						value={query}
-					/>
+							value={query}
+						/>
+					</div>
 					<Icon
 						onClick={toggleSearchClicked}
 						Icon={AiOutlineSearch}
