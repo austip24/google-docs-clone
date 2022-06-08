@@ -3,10 +3,15 @@ import React, { useEffect } from "react";
 import { IoDocumentText } from "react-icons/io5";
 import Icon from "../components/Icon";
 import { useAuth } from "../providers/AuthContextProvider";
-import Router from "next/router";
+import { useRouter } from "next/router";
 
 const Login: NextPage = () => {
 	const { login, user } = useAuth();
+	const router = useRouter();
+
+	useEffect(() => {
+		if (user) router.replace("/");
+	}, [user, router]);
 
 	const handleLogin = async () => {
 		try {
@@ -15,12 +20,6 @@ const Login: NextPage = () => {
 			console.error(error);
 		}
 	};
-
-	useEffect(() => {
-		if (user) {
-			Router.replace("/");
-		}
-	}, [user]);
 
 	return (
 		<div className="h-screen flex flex-col items-center justify-center gap-4">

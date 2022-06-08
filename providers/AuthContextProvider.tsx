@@ -49,11 +49,11 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 		return () => unsubscribe();
 	}, []);
 
-	useEffect(() => {
-		if (!user) {
-			Router.replace("/login");
-		}
-	}, [user]);
+	// useEffect(() => {
+	// 	if (!user) {
+	// 		Router.replace("/login");
+	// 	}
+	// }, [user]);
 
 	const login = useCallback(async () => {
 		try {

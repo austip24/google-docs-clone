@@ -22,12 +22,19 @@ const Template: React.FC<TemplateProps> = ({
 	const closeModal = () => setIsOpen(false);
 	const openModal = () => setIsOpen(true);
 
+	const clearDocumentName = () => setDocumentName("");
+
 	const handleCancel = () => {
 		closeModal();
+		clearDocumentName();
 	};
 
-	const handleCreate = () => {
+	const handleCreateDocument = () => {
 		closeModal();
+		// TODO: Handle document creation
+
+		// -----
+		clearDocumentName();
 	};
 
 	const handleModalInputChange = (e: any) => {
@@ -80,6 +87,9 @@ const Template: React.FC<TemplateProps> = ({
 										className="w-full text-sm border-0 border-b border-gray-200 focus:border-gray-500 focus:ring-0 transition-colors duration-200"
 										value={documentName}
 										onChange={handleModalInputChange}
+										onKeyDown={(e) =>
+											e.key === "Enter" && handleCreateDocument()
+										}
 									/>
 									<div className="flex items-center justify-around">
 										<button
@@ -90,7 +100,7 @@ const Template: React.FC<TemplateProps> = ({
 										</button>
 										<button
 											className="border-2 border-sky-500 rounded-md px-10 py-1 font-bold text-white bg-sky-500 hover:bg-sky-700 hover:border-sky-700 active:ring-2 active:ring-offset-2 active:ring-sky-500 transition-colors duration-200 shadow-gray-400 shadow-md"
-											onClick={handleCreate}
+											onClick={handleCreateDocument}
 										>
 											Create
 										</button>

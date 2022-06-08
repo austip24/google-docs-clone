@@ -4,7 +4,7 @@ import { TbDotsVertical } from "react-icons/tb";
 
 const Header = () => {
 	return (
-		<div className="flex justify-between items-center">
+		<div className="flex justify-between items-center pt-4">
 			<h2 className="ml-4">Start a new document</h2>
 			<Icon
 				Icon={TbDotsVertical}
