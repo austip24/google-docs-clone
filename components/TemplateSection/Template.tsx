@@ -53,8 +53,6 @@ const Template: React.FC<TemplateProps> = ({
 				timestamp: serverTimestamp(),
 			});
 
-			console.log(`Document created: ${docRef.id}`);
-
 			const docSnap = await getDoc(doc(db, docRef.path));
 			if (docSnap.exists()) {
 				const data = docSnap.data();
@@ -66,7 +64,12 @@ const Template: React.FC<TemplateProps> = ({
 					documentName,
 					timestamp,
 				};
-				setAllDocuments((prev: Document[]) => [...prev, docObj]);
+
+				setAllDocuments((prev: Document[]) => [docObj, ...prev]);
+			} else {
+				throw new Error(
+					`Document snapshot for '${documentName}' does not exist`
+				);
 			}
 		} catch (error) {
 			console.error(`Error adding document: ${error}`);

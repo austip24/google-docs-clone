@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import DocumentsComponent from "../components/Documents";
 import TemplateSection from "../components/TemplateSection";
 import { db } from "../firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import { useDocumentContext } from "../providers/DocumentProvider";
 import { useEffect } from "react";
 import { Document } from "../types/document";
@@ -66,7 +66,7 @@ export const getStaticProps: GetStaticProps<any, Params> = async ({
 	if (uid === "" || uid === "/") return { props: {} };
 
 	const userDocsRef = collection(db, `userDocs/${uid}/docs`);
-	const q = query(userDocsRef);
+	const q = query(userDocsRef, orderBy("timestamp", "desc"));
 
 	const querySnapshot = await getDocs(q);
 	const docs = querySnapshot.docs.map((doc) => ({
@@ -74,8 +74,6 @@ export const getStaticProps: GetStaticProps<any, Params> = async ({
 		...doc.data(),
 		timestamp: doc.data().timestamp.toJSON(),
 	}));
-
-	console.log(docs);
 
 	return {
 		props: {

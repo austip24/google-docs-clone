@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 import {
 	DocumentContextType,
 	DocumentData,
-	Documents,
+	Document,
 } from "../types/document";
 
 const DocumentContext = createContext<any>({});
