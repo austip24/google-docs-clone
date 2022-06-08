@@ -95,10 +95,10 @@ const Header: React.FC<HeaderProps> = () => {
 									<div className="p-1">
 										<Menu.Item>
 											{({ active }) => (
-												<button
+												<div
 													className={`${
 														active ? "bg-gray-200" : "bg-white"
-													} group flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm font-medium transition-colors duration-200 ease-in-out`}
+													} group flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm font-medium transition-colors duration-200 ease-in-out cursor-pointer`}
 													onClick={handleLogout}
 												>
 													<Icon
@@ -106,7 +106,7 @@ const Header: React.FC<HeaderProps> = () => {
 														className="text-gray-700 text-xl"
 													/>
 													Logout
-												</button>
+												</div>
 											)}
 										</Menu.Item>
 									</div>
