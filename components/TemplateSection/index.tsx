@@ -15,6 +15,16 @@ const TemplateSection: React.FC<TemplateSectionProps> = () => {
 						imgAlt="Blank Template"
 						title="Blank"
 					/>
+					<Template
+						imgSrc="/blank_template.png"
+						imgAlt="Blank Template"
+						title="Blank"
+					/>
+					<Template
+						imgSrc="/blank_template.png"
+						imgAlt="Blank Template"
+						title="Blank"
+					/>
 				</div>
 			</div>
 		</section>

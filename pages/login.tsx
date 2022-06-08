@@ -10,7 +10,7 @@ const Login: NextPage = () => {
 	const router = useRouter();
 
 	useEffect(() => {
-		if (user) router.replace("/");
+		if (user) router.replace(`/`);
 	}, [user, router]);
 
 	const handleLogin = async () => {
@@ -31,7 +31,7 @@ const Login: NextPage = () => {
 				<span className="font-bold">Google</span> Docs
 			</h1>
 			<button
-				className="mt-4 px-14 py-2 text-md rounded text-gray-50 bg-sky-500 hover:bg-sky-600 focus:ring-4 ring-sky-500 ring-offset-2"
+				className="mt-4 px-14 py-2 text-md rounded text-gray-50 bg-sky-500 hover:bg-sky-600 focus:ring-2 ring-sky-500 ring-offset-2 shadow-sky-300 shadow-lg transition-colors duration-200"
 				onClick={handleLogin}
 			>
 				Login

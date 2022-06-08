@@ -4,7 +4,6 @@ import {
 	GoogleAuthProvider,
 	signOut,
 } from "firebase/auth";
-import Router from "next/router";
 import React, {
 	createContext,
 	useCallback,
@@ -12,7 +11,8 @@ import React, {
 	useEffect,
 	useState,
 } from "react";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 const provider = new GoogleAuthProvider();
 
@@ -40,6 +40,17 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 		const unsubscribe = auth.onAuthStateChanged((user) => {
 			if (user) {
 				setUser(user);
+
+				const addUser = async () => {
+					await setDoc(doc(db, "users", user.uid), {
+						displayName: user.displayName,
+						email: user.email,
+						emailVerified: user.emailVerified,
+						photoURL: user.photoURL,
+					});
+				};
+
+				addUser();
 			} else {
 				setUser(null);
 			}
@@ -48,12 +59,6 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 
 		return () => unsubscribe();
 	}, []);
-
-	// useEffect(() => {
-	// 	if (!user) {
-	// 		Router.replace("/login");
-	// 	}
-	// }, [user]);
 
 	const login = useCallback(async () => {
 		try {

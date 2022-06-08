@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { useAuth } from "../../providers/AuthContextProvider";
+import { db } from "../../firebase";
 
 interface TemplateProps {
 	imgSrc: string;
@@ -18,6 +21,7 @@ const Template: React.FC<TemplateProps> = ({
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [documentName, setDocumentName] = useState("");
+	const { user } = useAuth();
 
 	const closeModal = () => setIsOpen(false);
 	const openModal = () => setIsOpen(true);
@@ -29,11 +33,23 @@ const Template: React.FC<TemplateProps> = ({
 		clearDocumentName();
 	};
 
-	const handleCreateDocument = () => {
+	const handleCreateDocument = async () => {
 		closeModal();
-		// TODO: Handle document creation
 
-		// -----
+		if (documentName.length === 0 || !user) return;
+
+		try {
+			const docPath = `userDocs/${user.uid}/docs`;
+			const docRef = await addDoc(collection(db, docPath), {
+				documentName: documentName,
+				timestamp: serverTimestamp(),
+			});
+
+			console.log(`Document created: ${docRef.id}`);
+		} catch (error) {
+			console.error(`Error adding document: ${error}`);
+		}
+
 		clearDocumentName();
 	};
 
@@ -45,7 +61,9 @@ const Template: React.FC<TemplateProps> = ({
 		<div>
 			<div className="w-[200px] h-[250px] flex flex-col gap-2">
 				<button
-					className="border-2 border-gray-300 hover:border-sky-500 rounded-md mb-2 w-full h-full relative overflow-hidden transition-colors duration-150"
+					className={`${
+						isOpen && "border-sky-500"
+					} border-2 border-gray-300 hover:border-sky-500 rounded-md mb-2 w-full h-full relative overflow-hidden transition-colors duration-150`}
 					onClick={openModal}
 				>
 					<Image src={imgSrc} alt={imgAlt} layout="fill" quality={100} />
@@ -81,6 +99,10 @@ const Template: React.FC<TemplateProps> = ({
 								leaveTo="opacity-0 scale-95"
 							>
 								<Dialog.Panel className="w-full flex flex-col gap-4 max-w-sm transform overflow-hidden rounded-xl bg-white p-4 shadow-xl transition-all">
+									<Dialog.Title as="h2" className="text-gray-700">
+										Creating a new <span className="font-bold">{title}</span>{" "}
+										document
+									</Dialog.Title>
 									<input
 										type="text"
 										placeholder="Enter name of document..."

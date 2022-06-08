@@ -1,13 +1,27 @@
-import type { NextPage } from "next";
+import type {
+	GetStaticPaths,
+	GetStaticProps,
+	GetStaticPropsContext,
+	NextPage,
+} from "next";
+import { ParsedUrlQuery } from "querystring";
 import Head from "next/head";
 import Header from "../components/Header";
-import Documents from "../components/Documents";
+import DocumentsComponent from "../components/Documents";
 import TemplateSection from "../components/TemplateSection";
+import { db } from "../firebase";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { useDocumentContext } from "../providers/DocumentProvider";
+import { useEffect } from "react";
+import { Documents } from "../types/document";
 import { useAuth } from "../providers/AuthContextProvider";
 
-interface HomeProps {}
+interface HomeProps {
+}
 
 const Home: NextPage<HomeProps> = () => {
+	const { user } = useAuth();
+	const { allDocuments, setAllDocuments } = useDocumentContext();
 	return (
 		<div>
 			<Head>
@@ -16,15 +30,9 @@ const Home: NextPage<HomeProps> = () => {
 
 			<Header />
 			<TemplateSection />
-			<Documents />
+			<DocumentsComponent />
 		</div>
 	);
-};
-
-export const getServerSideProps = async () => {
-	return {
-		props: {},
-	};
 };
 
 export default Home;

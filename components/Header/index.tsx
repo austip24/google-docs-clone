@@ -31,7 +31,6 @@ const Header: React.FC<HeaderProps> = () => {
 			console.error(error);
 		}
 	}, [logout]);
-	console.log(user);
 
 	return (
 		<div className="sticky top-0 h-12 z-50 flex items-center px-4 py-2 shadow-md bg-white gap-1">

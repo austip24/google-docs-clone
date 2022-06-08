@@ -1,24 +1,28 @@
 import React, { createContext, useContext, useState } from "react";
-import { DocumentContextType, Document } from "../types/document";
+import {
+	DocumentContextType,
+	DocumentData,
+	Documents,
+} from "../types/document";
 
-const DocumentContext = createContext<DocumentContextType>({});
+const DocumentContext = createContext<any>({});
 
-export const useDocument = () => useContext(DocumentContext);
+export const useDocumentContext = () => useContext(DocumentContext);
 
 interface DocumentProviderProps {
 	children: React.ReactNode;
 }
 
 const DocumentProvider: React.FC<DocumentProviderProps> = ({ children }) => {
-	const [documents, setDocuments] = useState<Document[]>();
+	const [allDocuments, setAllDocuments] = useState<Document[]>();
 	const [filteredDocuments, setFilteredDocuments] = useState<Document[]>([]);
 	const [currentDocument, setCurrentDocument] = useState<Document | null>();
 
 	return (
 		<DocumentContext.Provider
 			value={{
-				documents,
-				setDocuments,
+				allDocuments,
+				setAllDocuments,
 				filteredDocuments,
 				setFilteredDocuments,
 				currentDocument,
