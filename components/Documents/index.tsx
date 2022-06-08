@@ -21,7 +21,7 @@ const Documents: React.FC<DocumentsProps> = () => {
 		<section className="flex items-center justify-center pt-2 pb-4 text-gray-700 px-2">
 			<div className="grow max-w-5xl flex flex-col">
 				<Header />
-				<div className="flex flex-col">
+				<div className="flex flex-col transition-all duration-200 ease-in-out">
 					{allDocuments?.map((doc: Document) => {
 						const { seconds, nanoseconds } = doc.timestamp;
 						const timestamp = new Timestamp(seconds, nanoseconds);
@@ -34,22 +34,6 @@ const Documents: React.FC<DocumentsProps> = () => {
 							/>
 						);
 					})}
-					{/* <DocumentRow name="This is a document" dateCreated="06-6-2022" />
-					<DocumentRow name="This is a document" dateCreated="06-6-2022" />
-					<DocumentRow name="This is a document" dateCreated="06-6-2022" />
-					<DocumentRow name="This is a document" dateCreated="06-6-2022" />
-					<DocumentRow name="This is a document" dateCreated="06-6-2022" />
-					<DocumentRow name="This is a document" dateCreated="06-6-2022" />
-					<DocumentRow name="This is a document" dateCreated="06-6-2022" />
-					<DocumentRow name="This is a document" dateCreated="06-6-2022" />
-					<DocumentRow name="This is a document" dateCreated="06-6-2022" />
-					<DocumentRow name="This is a document" dateCreated="06-6-2022" />
-					<DocumentRow name="This is a document" dateCreated="06-6-2022" />
-					<DocumentRow name="This is a document" dateCreated="06-6-2022" />
-					<DocumentRow name="This is a document" dateCreated="06-6-2022" />
-					<DocumentRow name="This is a document" dateCreated="06-6-2022" />
-					<DocumentRow name="This is a document" dateCreated="06-6-2022" />
-					<DocumentRow name="This is a document" dateCreated="06-6-2022" /> */}
 				</div>
 			</div>
 		</section>

@@ -12,11 +12,14 @@ const Login: NextPage = () => {
 	const handleLogin = async () => {
 		try {
 			await login();
-			if (user) router.push(`/${user.uid}`);
 		} catch (error) {
 			console.error(error);
 		}
 	};
+
+	useEffect(() => {
+		if (user) router.replace(`/${user.uid}`);
+	}, [user, router]);
 
 	return (
 		<div className="h-screen flex flex-col items-center justify-center gap-4">

@@ -13,7 +13,7 @@ import React, {
 } from "react";
 import { auth, db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 
 const provider = new GoogleAuthProvider();
 
@@ -34,7 +34,7 @@ interface AuthContextProviderProps {
 const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 	children,
 }) => {
-	const [user, setUser] = useState<User | null>(null);
+	const [user, setUser] = useState<User | null>(auth.currentUser);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -64,9 +64,9 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 	const login = useCallback(async () => {
 		try {
 			const result = await signInWithPopup(auth, provider);
-			const credential = GoogleAuthProvider.credentialFromResult(result);
-			const token = credential?.accessToken;
-			const user = result.user;
+			// const credential = GoogleAuthProvider.credentialFromResult(result);
+			// const token = credential?.accessToken;
+			// const user = result.user;
 		} catch (error: any) {
 			const errorCode = error.code;
 			const errorMessage = error.message;

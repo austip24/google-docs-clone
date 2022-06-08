@@ -10,7 +10,7 @@ interface DocumentProps {
 
 const DocumentRow: React.FC<DocumentProps> = ({ name, dateCreated }) => {
 	return (
-		<div className="group relative flex justify-between items-center rounded-3xl hover:bg-blue-100 cursor-pointer py-1 transition-colors duration-200 ease-in-out">
+		<div className="group relative flex justify-between items-center rounded-3xl hover:bg-blue-100 cursor-pointer py-1 transition-all duration-200 ease-in-out">
 			<div className="flex items-center">
 				<Icon
 					Icon={HiDocumentText}

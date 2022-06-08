@@ -8,9 +8,8 @@ const Home: NextPage = () => {
 	const router = useRouter();
 
 	useEffect(() => {
-		if (user) router.push(`/${user.uid}`);
+		if (user) router.replace(`/${user.uid}`);
 	}, [user, router]);
-	console.log(user);
 	return <></>;
 };
 
