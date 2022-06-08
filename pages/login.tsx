@@ -9,13 +9,10 @@ const Login: NextPage = () => {
 	const { login, user } = useAuth();
 	const router = useRouter();
 
-	useEffect(() => {
-		if (user) router.replace(`/`);
-	}, [user, router]);
-
 	const handleLogin = async () => {
 		try {
 			await login();
+			if (user) router.push(`/${user.uid}`);
 		} catch (error) {
 			console.error(error);
 		}

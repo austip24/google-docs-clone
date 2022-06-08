@@ -11,7 +11,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 	const router = useRouter();
 
 	useEffect(() => {
-		if (!user) router.replace("/login");
+		if (!user) router.push("/login");
 	}, [user, router]);
 
 	return <>{user ? children : null}</>;
