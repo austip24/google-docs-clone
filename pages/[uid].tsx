@@ -8,12 +8,12 @@ import { db } from "../firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { useDocumentContext } from "../providers/DocumentProvider";
 import { useEffect } from "react";
-import { Documents } from "../types/document";
+import { Document } from "../types/document";
 import { useAuth } from "../providers/AuthContextProvider";
 import { useRouter } from "next/router";
 
 interface UserPageProps {
-	docs: Documents;
+	docs: Document[];
 }
 
 interface Params extends ParsedUrlQuery {
@@ -21,8 +21,12 @@ interface Params extends ParsedUrlQuery {
 }
 
 const UserPage: NextPage<UserPageProps> = ({ docs }) => {
-	const { user } = useAuth();
-	const { allDocuments, setAllDocuments } = useDocumentContext();
+	const { setAllDocuments } = useDocumentContext();
+
+	useEffect(() => {
+		setAllDocuments(docs);
+	}, [docs, setAllDocuments]);
+
 	return (
 		<div>
 			<Head>
@@ -40,9 +44,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 	const userDocsRef = collection(db, "userDocs");
 	const q = query(userDocsRef);
 	const querySnapshot = await getDocs(q);
-	// console.log(1);
 	const paths = querySnapshot.docs.map((doc) => {
-		// console.log(doc.data());
 		return {
 			params: {
 				uid: doc.id,

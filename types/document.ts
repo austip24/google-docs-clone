@@ -1,12 +1,18 @@
-import { FieldValue } from "firebase/firestore";
+import { Timestamp } from "firebase/firestore";
+
+type SerializedTimestamp = {
+	seconds: number;
+	nanoseconds: number;
+};
+
 export interface DocumentData {
 	documentName: string;
-	timestamp: FieldValue;
+	timestamp: Timestamp | SerializedTimestamp;
 	content?: string;
 }
 
-export interface Documents {
-	[id: string]: DocumentData;
+export interface Document extends DocumentData {
+	id: string;
 }
 
 export interface DocumentContextType {}

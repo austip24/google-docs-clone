@@ -13,11 +13,11 @@ import { db } from "../../firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { useDocumentContext } from "../../providers/DocumentProvider";
 import { useEffect } from "react";
-import { Documents } from "../../types/document";
+import { Document } from "../../types/document";
 import { useAuth } from "../../providers/AuthContextProvider";
 
 interface DocumentPageProps {
-	docs: Documents;
+	docs: Document[];
 }
 
 interface PageParams extends ParsedUrlQuery {
@@ -36,7 +36,7 @@ const DocumentPage: NextPage<DocumentPageProps> = ({ docs }) => {
 
 			<Header />
 			<TemplateSection />
-			<DocumentsComponent />
+      <DocumentsComponent documents={docs} />
 		</div>
 	);
 };

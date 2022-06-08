@@ -8,7 +8,7 @@ interface DocumentProps {
 	dateCreated: string;
 }
 
-const Document: React.FC<DocumentProps> = ({ name, dateCreated }) => {
+const DocumentRow: React.FC<DocumentProps> = ({ name, dateCreated }) => {
 	return (
 		<div className="group relative flex justify-between items-center rounded-3xl hover:bg-blue-100 cursor-pointer py-1 transition-colors duration-200 ease-in-out">
 			<div className="flex items-center">
@@ -32,4 +32,4 @@ const Document: React.FC<DocumentProps> = ({ name, dateCreated }) => {
 	);
 };
 
-export default Document;
+export default DocumentRow;

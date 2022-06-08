@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+	collection,
+	addDoc,
+	serverTimestamp,
+	getDoc,
+	doc,
+} from "firebase/firestore";
 import { useAuth } from "../../providers/AuthContextProvider";
 import { db } from "../../firebase";
+import { useDocumentContext } from "../../providers/DocumentProvider";
 
 interface TemplateProps {
 	imgSrc: string;
@@ -21,6 +28,7 @@ const Template: React.FC<TemplateProps> = ({
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [documentName, setDocumentName] = useState("");
+	const { setAllDocuments } = useDocumentContext();
 	const { user } = useAuth();
 
 	const closeModal = () => setIsOpen(false);
@@ -46,6 +54,20 @@ const Template: React.FC<TemplateProps> = ({
 			});
 
 			console.log(`Document created: ${docRef.id}`);
+
+			const docSnap = await getDoc(doc(db, docRef.path));
+			if (docSnap.exists()) {
+				const data = docSnap.data();
+				const { id } = docSnap;
+				const documentName = data?.documentName;
+				const timestamp = data?.timestamp.toJSON();
+				const docObj = {
+					id,
+					documentName,
+					timestamp,
+				};
+				setAllDocuments((prev: Document[]) => [...prev, docObj]);
+			}
 		} catch (error) {
 			console.error(`Error adding document: ${error}`);
 		}
