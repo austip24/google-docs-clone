@@ -102,7 +102,10 @@ const Header: React.FC<HeaderProps> = () => {
 													} group flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm font-medium transition-colors duration-200 ease-in-out`}
 													onClick={handleLogout}
 												>
-													<Icon Icon={BiLogOut} className="text-gray-700 text-xl" />
+													<Icon
+														Icon={BiLogOut}
+														className="text-gray-700 text-xl"
+													/>
 													Logout
 												</button>
 											)}

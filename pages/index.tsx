@@ -8,8 +8,6 @@ import { useAuth } from "../providers/AuthContextProvider";
 interface HomeProps {}
 
 const Home: NextPage<HomeProps> = () => {
-	const { user } = useAuth();
-
 	return (
 		<div>
 			<Head>
