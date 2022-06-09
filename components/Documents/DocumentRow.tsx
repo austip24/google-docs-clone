@@ -1,11 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { TbDotsVertical } from "react-icons/tb";
+import { TbDotsVertical, TbTrash } from "react-icons/tb";
 import { HiDocumentText } from "react-icons/hi";
 import Icon from "../Icon";
 import { useDocumentContext } from "../../providers/DocumentProvider";
 import { useRouter } from "next/router";
-import { DocumentContextType } from "../../types/document";
 import { Menu, Transition } from "@headlessui/react";
+import { db } from "../../firebase";
+import { doc, deleteDoc } from "firebase/firestore";
+import { useAuth } from "../../providers/AuthContextProvider";
 
 interface DocumentProps {
 	docId: string;
@@ -14,20 +16,45 @@ interface DocumentProps {
 }
 
 const DocumentRow: React.FC<DocumentProps> = ({ name, dateCreated, docId }) => {
-	const { setCurrentDocument, allDocuments } = useDocumentContext();
-	const [menuOpen, setMenuOpen] = useState(false);
+	const { user } = useAuth();
+	const { setCurrentDocument, allDocuments, setAllDocuments } =
+		useDocumentContext();
+	const router = useRouter();
 
-	const handleRowClick: React.MouseEventHandler = (e) =>
-		console.log("row clicked");
-	const handleIconClick: React.MouseEventHandler = (e) =>
-		console.log("icon clicked");
-	const handleRemoveClick: React.MouseEventHandler = (e) =>
-		console.log("remove clicked");
+	const handleRowClick: React.MouseEventHandler = useCallback(
+		(_) => {
+			if (!setCurrentDocument) {
+				return;
+			}
+
+			const currDoc = allDocuments?.find((doc) => doc.id === docId);
+
+			if (currDoc) {
+				setCurrentDocument(currDoc);
+			}
+
+			router.push(`${router.asPath}/doc/${docId}`);
+		},
+		[docId, setCurrentDocument, allDocuments, router]
+	);
+
+	const handleRemoveClick: React.MouseEventHandler = useCallback(
+		async (_) => {
+			try {
+				const docPath = `userDocs/${user?.uid}/docs/${docId}`;
+				await deleteDoc(doc(db, docPath));
+				setAllDocuments(allDocuments?.filter((doc) => doc.id !== docId));
+			} catch (error) {
+				console.error(`Document deletion failed ${error}`);
+			}
+		},
+		[user, docId, setAllDocuments, allDocuments]
+	);
 
 	return (
-		<div className="group relative flex justify-between items-center rounded-3xl hover:bg-blue-100 cursor-pointer py-1 transition-all duration-200 ease-in-out select-none">
+		<div className="group relative flex justify-between items-center rounded-3xl hover:bg-blue-100 cursor-pointer transition-all duration-200 ease-in-out select-none">
 			<div
-				className="flex items-center justify-between grow"
+				className="flex items-center justify-between grow py-1"
 				onClick={handleRowClick}
 			>
 				<div className="flex items-center">
@@ -48,7 +75,6 @@ const DocumentRow: React.FC<DocumentProps> = ({ name, dateCreated, docId }) => {
 					<Icon
 						Icon={TbDotsVertical}
 						className="absolute right-0 top-1 p-2 text-4xl text-gray-700 cursor-pointer hover:bg-gray-300 rounded-full transition-all duration-200 ease-in-out mr-2"
-						onClick={handleIconClick}
 					/>
 				</Menu.Button>
 				<Transition
@@ -63,14 +89,15 @@ const DocumentRow: React.FC<DocumentProps> = ({ name, dateCreated, docId }) => {
 					<Menu.Items className="absolute right-4 -bottom-9 w-36 bg-white p-1 rounded-lg shadow-xl z-50 border-gray-300 border">
 						<Menu.Item>
 							{({ active }) => (
-								<button
+								<div
 									className={`${
 										active && "bg-gray-200"
-									} text-sm font-semibold text-gray-700 w-full rounded-lg text-left p-1 pl-4`}
+									} flex items-center text-xs font-semibold text-gray-700 w-full rounded-lg text-left p-1 pl-2 gap-2`}
 									onClick={handleRemoveClick}
 								>
+									<Icon Icon={TbTrash} className="h-5 w-5" />
 									Remove
-								</button>
+								</div>
 							)}
 						</Menu.Item>
 					</Menu.Items>

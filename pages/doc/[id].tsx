@@ -36,7 +36,7 @@ const DocumentPage: NextPage<DocumentPageProps> = ({ docs }) => {
 
 			<Header />
 			<TemplateSection />
-      <DocumentsComponent documents={docs} />
+			<DocumentsComponent documents={docs} />
 		</div>
 	);
 };

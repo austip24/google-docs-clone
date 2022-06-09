@@ -18,7 +18,7 @@ const Login: NextPage = () => {
 	};
 
 	useEffect(() => {
-		if (user) router.replace(`/${user.uid}`);
+		if (user) router.replace(`/`);
 	}, [user, router]);
 
 	return (

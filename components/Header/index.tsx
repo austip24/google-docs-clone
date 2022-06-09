@@ -33,11 +33,13 @@ const Header: React.FC<HeaderProps> = () => {
 	}, [logout]);
 
 	return (
-		<div className="sticky top-0 h-12 z-50 flex items-center px-4 py-2 shadow-md bg-white gap-1">
+		<div
+			className={`sticky top-0 h-12 z-50 flex items-center px-4 py-2 shadow-md bg-white gap-1`}
+		>
 			{/* Hamburger menu icon */}
 			<Icon
 				Icon={AiOutlineMenu}
-				className={`${!isMinWidthMedium && searchClicked ? "hidden" : ""} 
+				className={`${!isMinWidthMedium && searchClicked ? "hidden" : ""}
 					p-2 text-4xl text-gray-700 cursor-pointer hover:bg-gray-200 rounded-full transition-all duration-200`}
 			/>
 

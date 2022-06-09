@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useState } from "react";
-import { DocumentContextType, DocumentData, Document } from "../types/document";
+import { DocumentContextType, Document } from "../types/document";
 
-const DocumentContext = createContext<DocumentContextType>({});
+const DocumentContext = createContext<DocumentContextType>(
+	{} as DocumentContextType
+);
 
 export const useDocumentContext = () => useContext(DocumentContext);
 
@@ -10,9 +12,11 @@ interface DocumentProviderProps {
 }
 
 const DocumentProvider: React.FC<DocumentProviderProps> = ({ children }) => {
-	const [allDocuments, setAllDocuments] = useState<Document[]>();
+	const [allDocuments, setAllDocuments] = useState<Document[]>([]);
 	const [filteredDocuments, setFilteredDocuments] = useState<Document[]>([]);
-	const [currentDocument, setCurrentDocument] = useState<Document | null>(null);
+	const [currentDocument, setCurrentDocument] = useState<Document>(
+		{} as Document
+	);
 
 	return (
 		<DocumentContext.Provider
