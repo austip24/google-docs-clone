@@ -7,7 +7,7 @@ interface TemplateSectionProps {}
 const TemplateSection: React.FC<TemplateSectionProps> = () => {
 	return (
 		<section className="bg-gray-200 flex items-center justify-center pt-2 pb-4 text-gray-700">
-			<div className="grow max-w-5xl flex flex-col">
+			<div className="grow max-w-4xl flex flex-col">
 				<Header />
 				<div className="flex gap-5 flex-wrap p-2">
 					<Template

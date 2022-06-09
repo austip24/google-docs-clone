@@ -1,4 +1,5 @@
 import { Timestamp } from "firebase/firestore";
+import React from "react";
 
 type SerializedTimestamp = {
 	seconds: number;
@@ -15,4 +16,15 @@ export interface Document extends DocumentData {
 	id: string;
 }
 
-export interface DocumentContextType {}
+export interface DocumentContextType {
+	allDocuments?: Document[];
+	setAllDocuments?: React.Dispatch<
+		React.SetStateAction<Document[] | undefined>
+	>;
+	filteredDocuments?: Document[];
+	setFilteredDocuments?: React.Dispatch<React.SetStateAction<Document[]>>;
+	currentDocument?: Document | null;
+	setCurrentDocument?:
+		| React.Dispatch<React.SetStateAction<Document | null>>
+		| undefined;
+}

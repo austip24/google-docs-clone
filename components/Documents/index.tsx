@@ -18,8 +18,8 @@ const Documents: React.FC<DocumentsProps> = () => {
 	};
 
 	return (
-		<section className="flex items-center justify-center pt-2 pb-4 text-gray-700 px-2">
-			<div className="grow max-w-5xl flex flex-col">
+		<section className="mx-2 sm:mx-0 flex items-center justify-center pt-2 pb-4 text-gray-700 px-2">
+			<div className="grow max-w-4xl flex flex-col">
 				<Header />
 				<div className="flex flex-col transition-all duration-200 ease-in-out">
 					{allDocuments?.map((doc: Document) => {
@@ -29,6 +29,7 @@ const Documents: React.FC<DocumentsProps> = () => {
 						return (
 							<DocumentRow
 								key={doc.id}
+								docId={doc.id}
 								name={doc.documentName}
 								dateCreated={timestampToString(timestamp)}
 							/>
