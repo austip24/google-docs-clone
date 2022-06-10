@@ -124,7 +124,7 @@ const Template: React.FC<TemplateProps> = ({
 								leaveFrom="opacity-100 scale-100"
 								leaveTo="opacity-0 scale-95"
 							>
-								<Dialog.Panel className="w-full flex flex-col gap-4 max-w-sm transform overflow-hidden rounded-xl bg-white dark:bg-slate-600 p-4 shadow-xl transition-all text-gray-700 dark:text-gray-50">
+								<Dialog.Panel className="w-full flex flex-col gap-4 max-w-sm transform overflow-hidden rounded-xl bg-white dark:bg-slate-700 p-4 shadow-xl transition-all text-gray-700 dark:text-gray-50">
 									<Dialog.Title as="h2">
 										Creating a new <span className="font-bold">{title}</span>{" "}
 										document
@@ -132,7 +132,7 @@ const Template: React.FC<TemplateProps> = ({
 									<input
 										type="text"
 										placeholder="Enter name of document..."
-										className="w-full text-sm border-0 border-b border-gray-200 dark:border-slate-500 focus:border-gray-500 focus:dark:border-slate-200 focus:ring-0 transition-colors duration-200 dark:bg-slate-600 placeholder:dark:text-slate-400"
+										className="w-full text-sm border-0 border-b border-gray-200 dark:border-slate-500 focus:border-gray-500 focus:dark:border-slate-200 focus:ring-0 transition-colors duration-200 dark:bg-slate-700 placeholder:dark:text-slate-400"
 										value={documentName}
 										onChange={handleModalInputChange}
 										onKeyDown={(e) =>
@@ -141,13 +141,13 @@ const Template: React.FC<TemplateProps> = ({
 									/>
 									<div className="flex items-center justify-around">
 										<button
-											className="border-2 border-sky-500 rounded-md px-10 py-1 font-bold text-sky-700 dark:text-sky-400 hover:bg-sky-500 hover:text-white active:ring-2 active:ring-offset-2 dark:ring-offset-slate-600 active:ring-sky-500 transition-colors duration-200 hover:shadow-md"
+											className="border-2 border-sky-500 rounded-md px-10 py-1 font-bold text-sky-700 dark:text-sky-400 hover:bg-sky-500 hover:text-white active:ring-2 active:ring-offset-2 dark:ring-offset-slate-700 active:ring-sky-500 transition-colors duration-200 hover:shadow-md"
 											onClick={handleCancel}
 										>
 											Cancel
 										</button>
 										<button
-											className="border-2 border-sky-500 rounded-md px-10 py-1 font-bold text-white bg-sky-500 hover:bg-sky-700 hover:dark:bg-sky-600 hover:border-sky-700 hover:dark:border-sky-600 active:ring-2 active:ring-offset-2 active:ring-sky-500 dark:ring-offset-slate-600 transition-colors duration-200 shadow-gray-400 shadow-md dark:shadow-slate-800"
+											className="border-2 border-sky-500 rounded-md px-10 py-1 font-bold text-white bg-sky-500 hover:bg-sky-700  hover:border-sky-700 active:ring-2 active:ring-offset-2 active:ring-sky-500 dark:ring-offset-slate-600 transition-colors duration-200 shadow-gray-400 shadow-md dark:shadow-slate-800"
 											onClick={handleCreateDocument}
 										>
 											Create

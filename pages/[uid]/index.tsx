@@ -32,7 +32,7 @@ const UserPage: NextPage<UserPageProps> = ({ docs }) => {
 	}, [docs, setAllDocuments, deletedDocuments]);
 
 	return (
-		<div>
+		<div className="flex flex-col h-screen">
 			<Head>
 				<title>Google Docs Clone</title>
 			</Head>

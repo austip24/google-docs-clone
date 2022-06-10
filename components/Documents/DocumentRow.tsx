@@ -75,7 +75,7 @@ const DocumentRow: React.FC<DocumentProps> = ({ name, dateCreated, docId }) => {
 	);
 
 	return (
-		<div className="group relative flex justify-between items-center rounded-3xl hover:bg-blue-100 cursor-pointer transition-all duration-200 ease-in-out select-none">
+		<div className="group relative flex justify-between items-center rounded-3xl hover:bg-blue-100 hover:dark:bg-slate-600 cursor-pointer transition-all duration-200 ease-in-out select-none">
 			<div
 				className="flex items-center justify-between grow py-1"
 				onClick={handleRowClick}
@@ -90,14 +90,16 @@ const DocumentRow: React.FC<DocumentProps> = ({ name, dateCreated, docId }) => {
 					</h2>
 				</div>
 				<div className="mr-14 md:mr-28">
-					<h2 className="text-sm font-semibold text-gray-500">{dateCreated}</h2>
+					<h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 group-hover:dark:text-gray-300">
+						{dateCreated}
+					</h2>
 				</div>
 			</div>
 			<Menu>
 				<Menu.Button>
 					<Icon
 						Icon={TbDotsVertical}
-						className="absolute right-0 top-1 p-2 text-4xl text-gray-700 cursor-pointer hover:bg-gray-300 rounded-full transition-all duration-200 ease-in-out mr-2"
+						className="absolute right-0 top-1 p-2 text-4xl cursor-pointer hover:bg-gray-300 hover:dark:bg-slate-500 rounded-full transition-all duration-200 ease-in-out mr-2"
 					/>
 				</Menu.Button>
 				<Transition
@@ -109,13 +111,15 @@ const DocumentRow: React.FC<DocumentProps> = ({ name, dateCreated, docId }) => {
 					leaveFrom="transform opacity-100 scale-100"
 					leaveTo="transform opacity-0 scale-95"
 				>
-					<Menu.Items className="absolute right-4 -bottom-9 w-36 bg-white p-1 rounded-lg shadow-xl z-50 border-gray-300 border">
+					<Menu.Items className="absolute right-4 -bottom-9 w-36 divide divide-gray-100 bg-white dark:bg-slate-700 p-1 rounded-lg shadow-xl z-50 dark:shadow-slate-900 ring-1 ring-black dark:ring-slate-400 ring-opacity-5 focus:outline-none">
 						<Menu.Item>
 							{({ active }) => (
 								<div
 									className={`${
-										active && "bg-gray-200"
-									} flex items-center text-xs font-semibold text-gray-700 w-full rounded-lg text-left p-1 pl-2 gap-2`}
+										active
+											? "bg-gray-200 dark:bg-slate-600"
+											: "bg-white dark:bg-slate-700"
+									} flex items-center text-xs font-semibold w-full rounded-lg text-left p-1 pl-2 gap-2 transition-all duration-200 ease-in-out`}
 									onClick={handleRemoveClick}
 								>
 									<Icon Icon={TbTrash} className="h-5 w-5" />
