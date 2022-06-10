@@ -8,7 +8,7 @@ const Header = () => {
 			<h2 className="ml-4">Start a new document</h2>
 			<Icon
 				Icon={TbDotsVertical}
-				className="p-2 text-4xl text-gray-700 cursor-pointer hover:bg-gray-400 rounded-full transition-all duration-200 mr-2"
+				className="p-2 text-4xl cursor-pointer hover:bg-gray-400 hover:dark:bg-slate-700 rounded-full transition-all duration-200 mr-2"
 			/>
 		</div>
 	);

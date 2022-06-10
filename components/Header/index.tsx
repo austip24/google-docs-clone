@@ -34,7 +34,7 @@ const Header: React.FC<HeaderProps> = () => {
 
 	return (
 		<div
-			className={`sticky top-0 h-12 z-50 flex items-center px-4 py-2 gap-1 shadow-md bg-white dark:bg-slate-700 dark:shadow-stone-500 text-gray-700 dark:text-gray-50 `}
+			className={`sticky top-0 h-12 z-50 flex items-center px-4 py-2 gap-1 shadow-md bg-white dark:bg-slate-700 dark:shadow-slate-900 text-gray-700 dark:text-gray-50 `}
 		>
 			{/* Hamburger menu icon */}
 			<Icon
@@ -93,7 +93,7 @@ const Header: React.FC<HeaderProps> = () => {
 								leaveFrom="transform opacity-100 scale-100"
 								leaveTo="transform opacity-0 scale-95"
 							>
-								<Menu.Items className="absolute right-5 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-slate-700 shadow-lg dark:shadow-stone-500 ring-1 ring-black dark:ring-slate-400 ring-opacity-5 focus:outline-none">
+								<Menu.Items className="absolute right-5 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-slate-700 shadow-lg dark:shadow-slate-900 ring-1 ring-black dark:ring-slate-400 ring-opacity-5 focus:outline-none">
 									<div className="p-1">
 										<Menu.Item>
 											{({ active }) => (
