@@ -51,21 +51,21 @@ const SearchBar: React.FC<SearchBarProps> = ({
 					<div className="grow max-w-xl relative">
 						<Icon
 							Icon={AiOutlineSearch}
-							className="absolute top-[0.07rem] left-1 p-1 text-3xl text-gray-500 rounded-full transition-all duration-200 hover:bg-gray-200 cursor-pointer"
+							className="absolute top-[0.07rem] left-1 p-1 text-3xl rounded-full transition-all duration-200 hover:bg-gray-200 hover:dark:bg-slate-600 cursor-pointer"
 						/>
 						<input
 							ref={inputRef}
 							type="text"
 							onChange={handleInputChange}
 							placeholder="Search"
-							className="w-full px-10 py-1.5 text-sm text-gray-700 outline-none border-none bg-gray-100 rounded
-						focus:bg-white focus:shadow focus:ring-0 transition-all duration-200"
+							className="w-full px-10 py-1.5 text-sm outline-none border-none bg-gray-100 dark:bg-slate-800 rounded
+						focus:bg-white focus:dark:bg-slate-700 focus:shadow focus:dark:shadow-slate-500 focus:ring-0 focus:dark:ring-1 focus:dark:ring-slate-500 transition-all duration-200 placeholder:dark:text-slate-400"
 							value={query}
 						/>
 						{query.length > 0 && (
 							<Icon
 								Icon={ImCross}
-								className="absolute top-[0.07rem] right-1 p-2 text-3xl text-gray-500 rounded-full transition-all duration-200 hover:bg-gray-200 cursor-pointer"
+								className="absolute top-[0.07rem] right-1 p-2 text-3xl rounded-full transition-all duration-200 hover:bg-gray-200 hover:dark:bg-slate-600 cursor-pointer"
 								onClick={handleInputClear}
 							/>
 						)}
@@ -79,7 +79,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 							Icon={BiArrowBack}
 							className={`${
 								searchClicked ? "" : "hidden"
-							} absolute top-[0.07rem] left-1 p-1 text-3xl text-gray-500 rounded-full transition-all duration-200 hover:bg-gray-200 cursor-pointer`}
+							} absolute top-[0.07rem] left-1 p-1 text-3xl rounded-full transition-all duration-200 hover:bg-gray-200 hover:dark:bg-slate-600 cursor-pointer`}
 						/>
 						<input
 							ref={inputRef}
@@ -89,8 +89,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
 							onChange={handleInputChange}
 							className={`${
 								searchClicked ? "" : "hidden"
-							} w-full px-10 py-1.5 text-sm text-gray-700 outline-none border-none bg-gray-100 rounded
-						focus:bg-white focus:shadow focus:ring-0 transition-all duration-200`}
+							} w-full px-10 py-1.5 text-sm outline-none border-none bg-gray-100 dark:bg-slate-800 rounded
+						focus:bg-white focus:dark:bg-slate-700 focus:shadow focus:dark:shadow-slate-500 focus:ring-0 focus:dark:ring-1 focus:dark:ring-slate-500 transition-all duration-200 placeholder:dark:text-slate-400`}
 							value={query}
 						/>
 					</div>
@@ -99,14 +99,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
 						Icon={AiOutlineSearch}
 						className={`${
 							searchClicked ? "hidden" : ""
-						} p-2 text-4xl text-gray-500 rounded-full transition-all duration-200 ease-in-out hover:bg-gray-200 cursor-pointer`}
+						} p-2 text-4xl rounded-full transition-all duration-200 ease-in-out hover:bg-gray-200 hover:dark:bg-slate-600 cursor-pointer`}
 					/>
 					{query.length > 0 && (
 						<Icon
 							Icon={ImCross}
 							className={`${
 								searchClicked ? "" : "hidden"
-							} absolute top-[0.07rem] right-1 p-2 text-3xl text-gray-500 rounded-full transition-all duration-200 hover:bg-gray-200 cursor-pointer`}
+							} absolute top-[0.07rem] right-1 p-2 text-3xl rounded-full transition-all duration-200 hover:bg-gray-200 hover:dark:bg-slate-600 cursor-pointer`}
 							onClick={handleInputClear}
 						/>
 					)}

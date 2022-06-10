@@ -34,13 +34,13 @@ const Header: React.FC<HeaderProps> = () => {
 
 	return (
 		<div
-			className={`sticky top-0 h-12 z-50 flex items-center px-4 py-2 shadow-md bg-white gap-1`}
+			className={`sticky top-0 h-12 z-50 flex items-center px-4 py-2 gap-1 shadow-md bg-white dark:bg-slate-700 dark:shadow-stone-500 text-gray-700 dark:text-gray-50 `}
 		>
 			{/* Hamburger menu icon */}
 			<Icon
 				Icon={AiOutlineMenu}
 				className={`${!isMinWidthMedium && searchClicked ? "hidden" : ""}
-					p-2 text-4xl text-gray-700 cursor-pointer hover:bg-gray-200 rounded-full transition-all duration-200`}
+					p-2 text-4xl cursor-pointer hover:bg-gray-200 hover:dark:bg-slate-600 rounded-full transition-all duration-200`}
 			/>
 
 			{/* Document icon */}
@@ -52,10 +52,10 @@ const Header: React.FC<HeaderProps> = () => {
 				>
 					<Icon
 						Icon={IoDocumentText}
-						className="hidden md:block text-2xl cursor-pointer fill-sky-500"
+						className="hidden md:block text-2xl cursor-pointer fill-sky-500 dark:slate-50"
 					/>
 					{/* Docs */}
-					<h1 className="ml-1 text-gray-700 text-2xl">Docs</h1>
+					<h1 className="ml-1 text-2xl">Docs</h1>
 				</a>
 			</Link>
 
@@ -68,15 +68,15 @@ const Header: React.FC<HeaderProps> = () => {
 
 			<Icon
 				Icon={TbGridDots}
-				className="p-2 text-4xl text-gray-700 cursor-pointer hover:bg-gray-200 rounded-full transition-all duration-200"
+				className="p-2 text-4xl cursor-pointer hover:bg-gray-200 hover:dark:bg-slate-600 rounded-full transition-all duration-200"
 			/>
 
 			{user !== null ? (
-				<Menu as="div" className="mx-2 pb-1.5 text-gray-700">
+				<Menu as="div" className="mx-2 pb-1.5 ">
 					<div>
-						<Menu.Button className="h-6 w-6 cursor-pointer outline-white outline-8 outline hover:outline-gray-200 rounded-full relative transition-all duration-200 ease-in-out">
+						<Menu.Button className="h-6 w-6 cursor-pointer outline-white dark:outline-slate-700 outline-8 outline hover:outline-gray-200 hover:dark:outline-slate-600 rounded-full relative transition-all duration-200 ease-in-out">
 							<Image
-								className="text-gray-700 cursor-pointer hover:bg-gray-200 rounded-full transition-all duration-200"
+								className="cursor-pointer hover:bg-gray-200 rounded-full transition-all duration-200"
 								src={`${user.photoURL}`}
 								alt="User"
 								layout="fill"
@@ -93,20 +93,19 @@ const Header: React.FC<HeaderProps> = () => {
 								leaveFrom="transform opacity-100 scale-100"
 								leaveTo="transform opacity-0 scale-95"
 							>
-								<Menu.Items className="absolute right-5 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+								<Menu.Items className="absolute right-5 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-slate-700 shadow-lg dark:shadow-stone-500 ring-1 ring-black dark:ring-slate-400 ring-opacity-5 focus:outline-none">
 									<div className="p-1">
 										<Menu.Item>
 											{({ active }) => (
 												<div
 													className={`${
-														active ? "bg-gray-200" : "bg-white"
+														active
+															? "bg-gray-200 dark:bg-slate-600"
+															: "bg-white dark:bg-slate-700"
 													} group flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm font-medium transition-colors duration-200 ease-in-out cursor-pointer`}
 													onClick={handleLogout}
 												>
-													<Icon
-														Icon={BiLogOut}
-														className="text-gray-700 text-xl"
-													/>
+													<Icon Icon={BiLogOut} className="text-xl" />
 													Logout
 												</div>
 											)}
@@ -120,7 +119,7 @@ const Header: React.FC<HeaderProps> = () => {
 			) : (
 				<Icon
 					Icon={AiOutlineUser}
-					className="p-2 text-4xl text-gray-700 cursor-pointer hover:bg-gray-200 rounded-full transition-all duration-200"
+					className="p-2 text-4xl cursor-pointer hover:bg-gray-200 hover:dark:bg-slate-600 rounded-full transition-all duration-200"
 				/>
 			)}
 		</div>
