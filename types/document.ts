@@ -23,4 +23,6 @@ export interface DocumentContextType {
 	setFilteredDocuments: React.Dispatch<React.SetStateAction<Document[]>>;
 	currentDocument: Document;
 	setCurrentDocument: React.Dispatch<React.SetStateAction<Document>>;
+	deletedDocuments: Document[];
+	setDeletedDocuments: React.Dispatch<React.SetStateAction<Document[]>>;
 }

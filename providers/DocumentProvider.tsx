@@ -17,6 +17,7 @@ const DocumentProvider: React.FC<DocumentProviderProps> = ({ children }) => {
 	const [currentDocument, setCurrentDocument] = useState<Document>(
 		{} as Document
 	);
+	const [deletedDocuments, setDeletedDocuments] = useState<Document[]>([]);
 
 	return (
 		<DocumentContext.Provider
@@ -27,6 +28,8 @@ const DocumentProvider: React.FC<DocumentProviderProps> = ({ children }) => {
 				setFilteredDocuments,
 				currentDocument,
 				setCurrentDocument,
+				deletedDocuments,
+				setDeletedDocuments,
 			}}
 		>
 			{children}

@@ -8,6 +8,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { db } from "../../firebase";
 import { doc, deleteDoc } from "firebase/firestore";
 import { useAuth } from "../../providers/AuthContextProvider";
+import { reauthenticateWithRedirect } from "firebase/auth";
 
 interface DocumentProps {
 	docId: string;
@@ -17,38 +18,60 @@ interface DocumentProps {
 
 const DocumentRow: React.FC<DocumentProps> = ({ name, dateCreated, docId }) => {
 	const { user } = useAuth();
-	const { setCurrentDocument, allDocuments, setAllDocuments } =
-		useDocumentContext();
+	const {
+		setCurrentDocument,
+		allDocuments,
+		setAllDocuments,
+		setDeletedDocuments,
+	} = useDocumentContext();
 	const router = useRouter();
+
+	useEffect(() => {
+		router.prefetch(
+			`${router.asPath}/doc/[name]`,
+			`${router.asPath}/doc/${name}`
+		);
+	}, [router, name]);
 
 	const handleRowClick: React.MouseEventHandler = useCallback(
 		(_) => {
-			if (!setCurrentDocument) {
-				return;
-			}
-
 			const currDoc = allDocuments?.find((doc) => doc.id === docId);
 
 			if (currDoc) {
 				setCurrentDocument(currDoc);
 			}
 
-			router.push(`${router.asPath}/doc/${docId}`);
+			router.push({
+				pathname: `${router.asPath}/doc/[name]`,
+				query: { name },
+			});
 		},
-		[docId, setCurrentDocument, allDocuments, router]
+		[docId, setCurrentDocument, allDocuments, router, name]
 	);
 
 	const handleRemoveClick: React.MouseEventHandler = useCallback(
 		async (_) => {
 			try {
-				const docPath = `userDocs/${user?.uid}/docs/${docId}`;
+				if (!user) return;
+
+				const docPath = `userDocs/${user.uid}/docs/${docId}`;
 				await deleteDoc(doc(db, docPath));
-				setAllDocuments(allDocuments?.filter((doc) => doc.id !== docId));
+
+				setAllDocuments(
+					allDocuments?.filter((doc) => {
+						if (doc.id !== docId) {
+							return false;
+						} else {
+							setDeletedDocuments((prev) => [...prev, doc]);
+							return true;
+						}
+					})
+				);
 			} catch (error) {
 				console.error(`Document deletion failed ${error}`);
 			}
 		},
-		[user, docId, setAllDocuments, allDocuments]
+		[user, docId, setAllDocuments, allDocuments, setDeletedDocuments]
 	);
 
 	return (
