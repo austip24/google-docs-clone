@@ -8,21 +8,13 @@ import { Timestamp } from "firebase/firestore";
 interface DocumentsProps {}
 
 const Documents: React.FC<DocumentsProps> = () => {
-	const {
-		allDocuments,
-		filteredDocuments,
-		setFilteredDocuments,
-		setCurrentDocument,
-	} = useDocumentContext();
+	const { allDocuments, filteredDocuments, setFilteredDocuments } =
+		useDocumentContext();
 
 	const timestampToString = (timestamp: Timestamp) => {
 		const date = timestamp.toDate();
 		return date.toLocaleDateString();
 	};
-
-	useEffect(() => {
-		setCurrentDocument({} as Document);
-	}, [setCurrentDocument]);
 
 	return (
 		<section className="flex items-start justify-center pt-2 pb-4 text-gray-700 dark:text-gray-50 dark:bg-slate-700 px-2 sm:px-4 grow">

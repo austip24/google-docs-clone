@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 interface DocumentPageProps {}
 
 const DocumentPage: NextPage<DocumentPageProps> = () => {
-	const { user } = useAuth();
 	const { currentDocument, setCurrentDocument, allDocuments } =
 		useDocumentContext();
 	const router = useRouter();

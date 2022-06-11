@@ -9,6 +9,7 @@ import { db } from "../../firebase";
 import { doc, deleteDoc } from "firebase/firestore";
 import { useAuth } from "../../providers/AuthContextProvider";
 import { reauthenticateWithRedirect } from "firebase/auth";
+import Link from "next/link";
 
 interface DocumentProps {
 	docId: string;
@@ -18,30 +19,26 @@ interface DocumentProps {
 
 const DocumentRow: React.FC<DocumentProps> = ({ name, dateCreated, docId }) => {
 	const { user } = useAuth();
-	const {
-		setCurrentDocument,
-		allDocuments,
-		setAllDocuments,
-		setDeletedDocuments,
-	} = useDocumentContext();
+	const { allDocuments, setAllDocuments, setDeletedDocuments } =
+		useDocumentContext();
 	const router = useRouter();
 
-	useEffect(() => {
-		router.prefetch(
-			`${router.asPath}/doc/[name]`,
-			`${router.asPath}/doc/${name}`
-		);
-	}, [router, name]);
+	// useEffect(() => {
+	// 	router.prefetch(
+	// 		`${router.asPath}/doc/[name]`,
+	// 		`${router.asPath}/doc/${name}`
+	// 	);
+	// }, [router, name]);
 
-	const handleRowClick: React.MouseEventHandler = useCallback(
-		(_) => {
-			router.push({
-				pathname: `${router.asPath}/doc/[name]`,
-				query: { name },
-			});
-		},
-		[router, name]
-	);
+	// const handleRowClick: React.MouseEventHandler = useCallback(
+	// 	(_) => {
+	// 		router.push({
+	// 			pathname: `${router.asPath}/doc/[name]`,
+	// 			query: { name },
+	// 		});
+	// 	},
+	// 	[router, name]
+	// );
 
 	const handleRemoveClick: React.MouseEventHandler = useCallback(
 		async (_) => {
@@ -70,25 +67,30 @@ const DocumentRow: React.FC<DocumentProps> = ({ name, dateCreated, docId }) => {
 
 	return (
 		<div className="group relative flex justify-between items-center rounded-3xl hover:bg-blue-100 hover:dark:bg-slate-600 cursor-pointer transition-all duration-200 ease-in-out select-none">
-			<div
-				className="flex items-center justify-between grow py-1"
-				onClick={handleRowClick}
+			<Link
+				href={`${router.asPath}/doc/[name]`}
+				as={`${router.asPath}/doc/${name}`}
 			>
-				<div className="flex items-center">
-					<Icon
-						Icon={HiDocumentText}
-						className="ml-2 p-2 text-4xl text-sky-500"
-					/>
-					<h2 className="ml-2 text-sm font-semibold max-w-[225px] md:max-w-sm text-ellipsis overflow-hidden">
-						{name}
-					</h2>
+				<div
+					className="flex items-center justify-between grow py-1"
+					// onClick={handleRowClick}
+				>
+					<div className="flex items-center">
+						<Icon
+							Icon={HiDocumentText}
+							className="ml-2 p-2 text-4xl text-sky-500"
+						/>
+						<h2 className="ml-2 text-sm font-semibold max-w-[225px] md:max-w-sm text-ellipsis overflow-hidden">
+							{name}
+						</h2>
+					</div>
+					<div className="mr-14 md:mr-28">
+						<h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 group-hover:dark:text-gray-300">
+							{dateCreated}
+						</h2>
+					</div>
 				</div>
-				<div className="mr-14 md:mr-28">
-					<h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 group-hover:dark:text-gray-300">
-						{dateCreated}
-					</h2>
-				</div>
-			</div>
+			</Link>
 			<Menu>
 				<Menu.Button>
 					<Icon

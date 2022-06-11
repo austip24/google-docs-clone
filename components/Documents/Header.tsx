@@ -6,7 +6,7 @@ interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
 	return (
-		<div className="group relative flex justify-between items-center pt-1 pb-2 select-none">
+		<div className="group relative flex justify-between items-center pt-1 pb-2">
 			<div className="flex items-center justify-between grow">
 				<h2 className="ml-4 font-bold">My Documents</h2>
 			</div>
