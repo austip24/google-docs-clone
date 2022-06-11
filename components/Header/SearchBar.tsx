@@ -1,18 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import tailwindConfig from "../../tailwind.config";
-import useMediaQuery from "../../hooks/useMediaQuery";
 import Icon from "../Icon";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiArrowBack } from "react-icons/bi";
 import { ImCross } from "react-icons/im";
-
-const people = [
-	"Durward Reynolds",
-	"Kenton Towne",
-	"Therese Wunsch",
-	"Benedict Kessler",
-	"Katelyn Rohan",
-];
 
 interface SearchBarProps {
 	isMinWidthMedium?: boolean; // If true, the search bar will be a larger version

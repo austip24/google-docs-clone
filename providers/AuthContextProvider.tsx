@@ -13,7 +13,6 @@ import React, {
 } from "react";
 import { auth, db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
-import Router, { useRouter } from "next/router";
 
 const provider = new GoogleAuthProvider();
 

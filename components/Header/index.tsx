@@ -12,7 +12,6 @@ import useToggle from "../../hooks/useToggle";
 import { useAuth } from "../../providers/AuthContextProvider";
 import { Menu, Transition } from "@headlessui/react";
 import { BiLogOut } from "react-icons/bi";
-import { useRouter } from "next/router";
 
 interface HeaderProps {}
 
@@ -23,7 +22,6 @@ const Header: React.FC<HeaderProps> = () => {
 
 	const [searchClicked, toggleSearchClicked] = useToggle(false);
 	const { user, logout } = useAuth();
-	const router = useRouter();
 
 	const handleLogout = useCallback(async () => {
 		try {

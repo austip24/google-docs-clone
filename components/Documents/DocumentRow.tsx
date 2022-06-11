@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback } from "react";
 import { TbDotsVertical, TbTrash } from "react-icons/tb";
 import { HiDocumentText } from "react-icons/hi";
 import Icon from "../Icon";
@@ -8,7 +8,6 @@ import { Menu, Transition } from "@headlessui/react";
 import { db } from "../../firebase";
 import { doc, deleteDoc } from "firebase/firestore";
 import { useAuth } from "../../providers/AuthContextProvider";
-import { reauthenticateWithRedirect } from "firebase/auth";
 import Link from "next/link";
 
 interface DocumentProps {
