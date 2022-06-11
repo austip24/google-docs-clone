@@ -14,14 +14,24 @@ const Icon: React.FC<IconProps> = ({ Icon, className, href, onClick }) => {
 		<>
 			{href ? (
 				<Link href={href}>
-					<button onClick={onClick} className={`rounded-full p-0`}>
+					{onClick ? (
+						<button onClick={onClick} className={`rounded-full p-0`}>
+							<Icon className={className} />
+						</button>
+					) : (
 						<Icon className={className} />
-					</button>
+					)}
 				</Link>
 			) : (
-				<button onClick={onClick} className={`rounded-full p-0`}>
-					<Icon className={className} />
-				</button>
+				<>
+					{onClick ? (
+						<button onClick={onClick} className={`rounded-full p-0`}>
+							<Icon className={className} />
+						</button>
+					) : (
+						<Icon className={className} />
+					)}
+				</>
 			)}
 		</>
 	);

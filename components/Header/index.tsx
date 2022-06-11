@@ -12,6 +12,7 @@ import useToggle from "../../hooks/useToggle";
 import { useAuth } from "../../providers/AuthContextProvider";
 import { Menu, Transition } from "@headlessui/react";
 import { BiLogOut } from "react-icons/bi";
+import { useRouter } from "next/router";
 
 interface HeaderProps {}
 
@@ -21,8 +22,8 @@ const Header: React.FC<HeaderProps> = () => {
 	);
 
 	const [searchClicked, toggleSearchClicked] = useToggle(false);
-
 	const { user, logout } = useAuth();
+	const router = useRouter();
 
 	const handleLogout = useCallback(async () => {
 		try {
@@ -44,7 +45,7 @@ const Header: React.FC<HeaderProps> = () => {
 			/>
 
 			{/* Document icon */}
-			<Link href="/">
+			<Link href={`[uid]`} as={`${user?.uid}`}>
 				<a
 					className={`${
 						!isMinWidthMedium && searchClicked ? "hidden" : ""
@@ -52,7 +53,7 @@ const Header: React.FC<HeaderProps> = () => {
 				>
 					<Icon
 						Icon={IoDocumentText}
-						className="hidden md:block text-2xl cursor-pointer fill-sky-500 dark:slate-50"
+						className="hidden md:block text-2xl cursor-pointer fill-sky-500 dark:slate-50 mt-1"
 					/>
 					{/* Docs */}
 					<h1 className="ml-1 text-2xl">Docs</h1>
