@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { TbDotsVertical, TbTrash } from "react-icons/tb";
 import { HiDocumentText } from "react-icons/hi";
 import Icon from "../Icon";
@@ -18,62 +18,41 @@ interface DocumentProps {
 
 const DocumentRow: React.FC<DocumentProps> = ({ name, dateCreated, docId }) => {
 	const { user } = useAuth();
-	const { allDocuments, setAllDocuments, setDeletedDocuments } =
-		useDocumentContext();
+	const {
+		allDocuments,
+		setAllDocuments,
+		deletedDocuments,
+		setDeletedDocuments,
+	} = useDocumentContext();
 	const router = useRouter();
-
-	// useEffect(() => {
-	// 	router.prefetch(
-	// 		`${router.asPath}/doc/[name]`,
-	// 		`${router.asPath}/doc/${name}`
-	// 	);
-	// }, [router, name]);
-
-	// const handleRowClick: React.MouseEventHandler = useCallback(
-	// 	(_) => {
-	// 		router.push({
-	// 			pathname: `${router.asPath}/doc/[name]`,
-	// 			query: { name },
-	// 		});
-	// 	},
-	// 	[router, name]
-	// );
 
 	const handleRemoveClick: React.MouseEventHandler = useCallback(
 		async (_) => {
+			if (!user) return;
+			const docPath = `userDocs/${user.uid}/docs/${docId}`;
+
 			try {
-				if (!user) return;
-
-				const docPath = `userDocs/${user.uid}/docs/${docId}`;
 				await deleteDoc(doc(db, docPath));
-
-				setAllDocuments(
-					allDocuments?.filter((doc) => {
-						if (doc.id !== docId) {
-							return false;
-						} else {
-							setDeletedDocuments((prev) => [...prev, doc]);
-							return true;
-						}
-					})
-				);
 			} catch (error) {
 				console.error(`Document deletion failed ${error}`);
 			}
+
+			setAllDocuments((prev) => prev.filter((doc) => doc.id !== docId));
 		},
-		[user, docId, setAllDocuments, allDocuments, setDeletedDocuments]
+		[user, docId, setAllDocuments]
 	);
+
+	useEffect(() => {
+		console.log(JSON.stringify(allDocuments, null, 4));
+	}, [allDocuments]);
 
 	return (
 		<div className="group relative flex justify-between items-center rounded-3xl hover:bg-blue-100 hover:dark:bg-slate-600 cursor-pointer transition-all duration-200 ease-in-out select-none">
 			<Link
-				href={`${router.asPath}/doc/[name]`}
-				as={`${router.asPath}/doc/${name}`}
+				href={`${router.asPath}/doc/[docId]`}
+				as={`${router.asPath}/doc/${docId}`}
 			>
-				<div
-					className="flex items-center justify-between grow py-1"
-					// onClick={handleRowClick}
-				>
+				<div className="flex items-center justify-between grow py-1">
 					<div className="flex items-center">
 						<Icon
 							Icon={HiDocumentText}
