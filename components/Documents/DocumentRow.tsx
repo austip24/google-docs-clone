@@ -35,18 +35,12 @@ const DocumentRow: React.FC<DocumentProps> = ({ name, dateCreated, docId }) => {
 
 	const handleRowClick: React.MouseEventHandler = useCallback(
 		(_) => {
-			const currDoc = allDocuments?.find((doc) => doc.id === docId);
-
-			if (currDoc) {
-				setCurrentDocument(currDoc);
-			}
-
 			router.push({
 				pathname: `${router.asPath}/doc/[name]`,
 				query: { name },
 			});
 		},
-		[docId, setCurrentDocument, allDocuments, router, name]
+		[router, name]
 	);
 
 	const handleRemoveClick: React.MouseEventHandler = useCallback(

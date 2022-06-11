@@ -25,10 +25,12 @@ const UserPage: NextPage<UserPageProps> = ({ docs }) => {
 
 	useEffect(() => {
 		// filter doc in docs that is in deletedDocuments
+		console.log(`All Documents: ${JSON.stringify(docs)}`);
 		const docsNotDeleted = docs.filter(
 			(doc) => !deletedDocuments.some((deletedDoc) => deletedDoc.id === doc.id)
 		);
 		setAllDocuments(docsNotDeleted);
+		console.log(`All Documents after set: ${JSON.stringify(docsNotDeleted)}`);
 	}, [docs, setAllDocuments, deletedDocuments]);
 
 	return (

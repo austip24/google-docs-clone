@@ -1,28 +1,36 @@
-import type {
-	GetStaticPaths,
-	GetStaticProps,
-	GetStaticPropsContext,
-	NextPage,
-} from "next";
-import { ParsedUrlQuery } from "querystring";
+import type { NextPage } from "next";
 import Head from "next/head";
-import Header from "../../../components/Header";
-import DocumentsComponent from "../../../components/Documents";
-import TemplateSection from "../../../components/TemplateSection";
-import { db } from "../../../firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
 import { useDocumentContext } from "../../../providers/DocumentProvider";
 import { useEffect } from "react";
 import { Document } from "../../../types/document";
 import { useAuth } from "../../../providers/AuthContextProvider";
+import { useRouter } from "next/router";
 
-interface DocumentPageProps {
-	doc: Document;
-}
+interface DocumentPageProps {}
 
-const DocumentPage: NextPage<DocumentPageProps> = ({ doc }) => {
+const DocumentPage: NextPage<DocumentPageProps> = () => {
 	const { user } = useAuth();
-	const { allDocuments, setAllDocuments } = useDocumentContext();
+	const { currentDocument, setCurrentDocument, allDocuments } =
+		useDocumentContext();
+	const router = useRouter();
+	const { uid, name } = router.query;
+
+	useEffect(() => {
+		// find document by name
+		console.log(`All Documents: ${JSON.stringify(allDocuments)}`);
+		const doc = allDocuments.find((doc) => doc.documentName === name);
+		if (doc) setCurrentDocument(doc);
+		else console.log(`document with name ${name} not found`);
+	}, [allDocuments, setCurrentDocument, name]);
+
+	useEffect(() => {
+		console.log(`Current document: ${JSON.stringify(currentDocument)}`);
+	}, [currentDocument]);
+
+	useEffect(() => {
+		// console.log(`All Documents: ${JSON.stringify(allDocuments)}`);
+	}, [allDocuments]);
+
 	return (
 		<div>
 			<Head>
