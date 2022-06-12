@@ -11,8 +11,8 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
 	const router = useRouter();
 
 	return (
-		<AuthContextProvider>
-			<DocumentProvider>
+		<DocumentProvider>
+			<AuthContextProvider>
 				{noAuthRequired.includes(router.pathname) ? (
 					<Component {...pageProps} />
 				) : (
@@ -20,8 +20,8 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
 						<Component {...pageProps} />
 					</ProtectedRoute>
 				)}
-			</DocumentProvider>
-		</AuthContextProvider>
+			</AuthContextProvider>
+		</DocumentProvider>
 	);
 };
 

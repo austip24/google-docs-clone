@@ -20,6 +20,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../firebase";
 import DocHeader from "../../../components/DocHeader";
+import TextEditor from "../../../components/TextEditor";
 
 interface DocumentPageProps {
 	doc: Document;
@@ -31,20 +32,21 @@ interface Params extends ParsedUrlQuery {
 }
 
 const DocumentPage: NextPage<DocumentPageProps> = ({ doc }) => {
-	const { allDocuments } = useDocumentContext();
 	const { documentName } = doc;
+	const { setCurrentDocument } = useDocumentContext();
+
+	useEffect(() => {
+		if (doc) setCurrentDocument(doc);
+	}, [doc, setCurrentDocument]);
 
 	return (
-		<div>
+		<div className="h-screen dark:bg-slate-700 flex flex-col">
 			<Head>
 				<title>Google Docs Clone</title>
 			</Head>
 
 			<DocHeader title={documentName} />
-
-			<div className="font-bold text-rose-500 text-5xl text-center">
-				{documentName}
-			</div>
+			<TextEditor />
 		</div>
 	);
 };
