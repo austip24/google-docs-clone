@@ -51,7 +51,7 @@ const Header: React.FC<HeaderProps> = () => {
 				>
 					<Icon
 						Icon={IoDocumentText}
-						className="hidden md:block text-2xl cursor-pointer fill-sky-500 dark:slate-50 mt-1"
+						className="hidden md:block text-2xl cursor-pointer fill-sky-500 mt-1"
 					/>
 					{/* Docs */}
 					<h1 className="ml-1 text-2xl">Docs</h1>

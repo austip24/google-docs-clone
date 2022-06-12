@@ -17,7 +17,7 @@ const Documents: React.FC<DocumentsProps> = () => {
 	};
 
 	return (
-		<section className="flex items-start justify-center pt-2 pb-4 text-gray-700 dark:text-gray-50 dark:bg-slate-700 px-2 sm:px-4 grow">
+		<section className="flex items-start justify-center pt-2 pb-12 text-gray-700 dark:text-gray-50 dark:bg-slate-700 px-2 sm:px-4 grow">
 			<div className="grow max-w-4xl flex flex-col">
 				<Header />
 				<div className="flex flex-col transition-all duration-200 ease-in-out">

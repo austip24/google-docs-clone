@@ -19,6 +19,7 @@ import {
 	where,
 } from "firebase/firestore";
 import { db } from "../../../firebase";
+import DocHeader from "../../../components/DocHeader";
 
 interface DocumentPageProps {
 	doc: Document;
@@ -33,13 +34,13 @@ const DocumentPage: NextPage<DocumentPageProps> = ({ doc }) => {
 	const { allDocuments } = useDocumentContext();
 	const { documentName } = doc;
 
-	console.log(allDocuments);
-
 	return (
 		<div>
 			<Head>
 				<title>Google Docs Clone</title>
 			</Head>
+
+			<DocHeader title={documentName} />
 
 			<div className="font-bold text-rose-500 text-5xl text-center">
 				{documentName}

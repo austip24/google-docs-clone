@@ -42,10 +42,6 @@ const DocumentRow: React.FC<DocumentProps> = ({ name, dateCreated, docId }) => {
 		[user, docId, setAllDocuments]
 	);
 
-	useEffect(() => {
-		console.log(JSON.stringify(allDocuments, null, 4));
-	}, [allDocuments]);
-
 	return (
 		<div className="group relative flex justify-between items-center rounded-3xl hover:bg-blue-100 hover:dark:bg-slate-600 cursor-pointer transition-all duration-200 ease-in-out select-none">
 			<Link

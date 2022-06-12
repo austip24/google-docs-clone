@@ -25,11 +25,10 @@ const UserPage: NextPage<UserPageProps> = ({ docs }) => {
 
 	useEffect(() => {
 		// filter doc in docs that is in deletedDocuments
-		// const docsNotDeleted = docs.filter(
-		// 	(doc) => !deletedDocuments.some((deletedDoc) => deletedDoc.id === doc.id)
-		// );
-		setAllDocuments(docs);
-	}, [docs, setAllDocuments, deletedDocuments]);
+		if (docs) {
+			setAllDocuments(docs);
+		}
+	}, [docs, setAllDocuments]);
 
 	return (
 		<div className="flex flex-col h-screen">
