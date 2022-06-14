@@ -1,15 +1,16 @@
 import { Timestamp } from "firebase/firestore";
+import { EditorState, RawDraftContentState } from "draft-js";
 import React from "react";
 
-type SerializedDocumentTimestamp = {
+export interface SerializedDocumentTimestamp {
 	seconds: number;
 	nanoseconds: number;
-};
+}
 
 export interface DocumentData {
 	documentName: string;
 	timestamp: Timestamp | SerializedDocumentTimestamp;
-	content?: string;
+	editorState?: RawDraftContentState;
 }
 
 export interface Document extends DocumentData {

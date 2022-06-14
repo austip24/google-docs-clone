@@ -2,7 +2,7 @@ import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import Head from "next/head";
 import { useDocumentContext } from "../../../providers/DocumentProvider";
 import { useEffect } from "react";
-import { Document } from "../../../types/document";
+import { Document, SerializedDocumentTimestamp } from "../../../types/document";
 import { useAuth } from "../../../providers/AuthContextProvider";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
@@ -14,6 +14,7 @@ import {
 	documentId,
 	getDoc,
 	getDocs,
+	onSnapshot,
 	query,
 	QuerySnapshot,
 	where,
@@ -23,7 +24,7 @@ import DocHeader from "../../../components/DocHeader";
 import TextEditor from "../../../components/TextEditor";
 
 interface DocumentPageProps {
-	doc: Document;
+	document: Document;
 }
 
 interface Params extends ParsedUrlQuery {
@@ -31,13 +32,27 @@ interface Params extends ParsedUrlQuery {
 	uid: string;
 }
 
-const DocumentPage: NextPage<DocumentPageProps> = ({ doc }) => {
-	const { documentName } = doc;
+const DocumentPage: NextPage<DocumentPageProps> = ({ document }) => {
+	const { documentName } = document;
 	const { setCurrentDocument } = useDocumentContext();
+	const router = useRouter();
+	const { uid, docId } = router.query;
 
 	useEffect(() => {
-		if (doc) setCurrentDocument(doc);
-	}, [doc, setCurrentDocument]);
+		if (document) setCurrentDocument(document);
+		// const docPath = `userDocs/${uid}/docs/${docId}`;
+		// const docRef = doc(db, docPath);
+		// const unsub = onSnapshot(docRef, (doc) => {
+		// 	const thisDoc = {
+		// 		id: doc.id,
+		// 		...doc.data(),
+		// 		timestamp: doc.data()!.timestamp.toJSON(),
+		// 	};
+		// 	setCurrentDocument(thisDoc as Document);
+		// });
+
+		// return () => unsub();
+	}, [uid, docId, document, setCurrentDocument]);
 
 	return (
 		<div className="h-screen dark:bg-slate-700 flex flex-col">
@@ -91,15 +106,15 @@ export const getStaticProps: GetStaticProps<any, Params> = async ({
 		};
 		return {
 			props: {
-				doc: thisDoc,
+				document: thisDoc,
 			},
-			revalidate: 10,
+			revalidate: 1,
 		};
 	}
 
 	return {
 		props: {
-			doc: {},
+			document: {},
 		},
 	};
 };

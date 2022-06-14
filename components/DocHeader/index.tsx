@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import Icon from "../Icon";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -10,6 +10,8 @@ import { AiOutlineUser, AiFillLock } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 
 import { HiDocumentText } from "react-icons/hi";
+import { db } from "../../firebase";
+import { doc, updateDoc } from "firebase/firestore";
 
 interface DocHeaderProps {
 	title: string;
@@ -17,14 +19,41 @@ interface DocHeaderProps {
 
 const DocHeader: React.FC<DocHeaderProps> = ({ title }) => {
 	const router = useRouter();
-	const { uid } = router.query;
+	const { uid, docId } = router.query;
 	const { user, logout } = useAuth();
 	const [docTitle, setDocTitle] = useState(title);
+	const [prevDocTitle, setPrevDocTitle] = useState(title);
+	const titleRef = useRef<HTMLInputElement>(null);
 
 	const handleOnTitleChange: React.ChangeEventHandler<HTMLInputElement> = (
 		e
 	) => {
+		setPrevDocTitle(docTitle);
 		setDocTitle(e.target.value);
+	};
+
+	const handleOnTitleBlur: React.FocusEventHandler<HTMLInputElement> = async (
+		e
+	) => {
+		if (docTitle === prevDocTitle) return;
+		setPrevDocTitle(docTitle);
+
+		const docPath = `userDocs/${uid}/docs/${docId}`;
+		const docRef = doc(db, docPath);
+
+		try {
+			await updateDoc(docRef, {
+				documentName: docTitle,
+			});
+		} catch (error) {
+			console.log(`error: failed to change document title for ${docId}`);
+		}
+	};
+
+	const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+		if (e.key === "Enter" || e.key === "Escape") {
+			titleRef?.current?.blur();
+		}
 	};
 
 	const handleLogout = useCallback(async () => {
@@ -53,8 +82,11 @@ const DocHeader: React.FC<DocHeaderProps> = ({ title }) => {
 			<div className="flex flex-col grow overflow-hidden py-2 px-2">
 				<input
 					type="text"
+					ref={titleRef}
 					value={docTitle}
 					onChange={handleOnTitleChange}
+					onKeyDown={handleKeyDown}
+					onBlur={handleOnTitleBlur}
 					style={{ width: `${docTitle.length + 1}ch` }}
 					className="max-w-full -ml-1 px-1 py-0.5 text-sm outline-none border-none font-semibold text-gray-400 dark:text-gray-300 dark:bg-slate-700 rounded-sm hover:ring-1 focus:text-gray-700 focus:dark:text-gray-200 focus:ring-2 ring-gray-200 dark:ring-slate-400 focus:ring-sky-500 focus:dark:ring-slate-400 transition-transform duration-100 tracking-wider"
 				/>
